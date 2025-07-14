@@ -1,124 +1,228 @@
-[![Latest Stable Version](https://poser.pugx.org/blair2004/nexopos/v)](//packagist.org/packages/blair2004/nexopos) [![Total Downloads](https://poser.pugx.org/blair2004/nexopos/downloads)](//packagist.org/packages/blair2004/nexopos) [![Latest Unstable Version](https://poser.pugx.org/blair2004/nexopos/v/unstable)](//packagist.org/packages/blair2004/nexopos) [![License](https://poser.pugx.org/blair2004/nexopos/license)](//packagist.org/packages/blair2004/nexopos)
+# Firuman POS System
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/5265663/162700085-40ed00ca-9154-42cb-850a-ccf1c2db2d5d.png" alt="NexoPOS"/>
-</p>
+<div align="center">
+  <img src="public/svg/firuman-variant-1.svg" alt="Firuman Logo" width="128">
+  <h3>No Bloat. No Noise. Just Firuman.</h3>
+  <p>A powerful, modern Point of Sale system built on Laravel</p>
+</div>
 
-NexoPOS 4 is a free point-of-sale system built using Laravel, TailwindCSS, Vue, and other open-source resources. This POS System focuses on utilities and functionalities to offer for most businesses all the tools they need to manage better their store. NexoPOS includes a responsive and beautiful dashboard that ease the interaction either on a smartphone, tablet, or desktops.
+## About Firuman
 
-Read Review On:
-[![Laravel News](https://user-images.githubusercontent.com/5265663/186377311-c42ddd2c-bc84-465c-a3b6-94e6df8d68bc.jpg)](https://laravel-news.com/nexopos-point-of-sale-for-laravel?utm_source=github.com&utm_medium=readme&utm_campagin=nexopos)
+Firuman is a comprehensive Point of Sale (POS) system designed for modern businesses. Built on the robust Laravel framework with a Vue.js frontend, Firuman provides a seamless experience for managing sales, inventory, customers, and business operations. This system focuses on utilities and functionalities to offer businesses all the tools they need to manage their store efficiently.
 
-## Demo
-- Regular : https://v4.nexopos.com
-- MultiStore : https://v4-multi.nexopos.com
-- Gastro : https://v4-gastro.nexopos.com
-- Username : demouser
-- Password : 123456
+## Features
 
-[![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/blair2004/NexoPOS/tree/v5.0.x&refcode=ebdb80cb0ec7)
+- 🛒 **Point of Sale Interface** - Intuitive POS system for quick transactions
+- 📊 **Inventory Management** - Track products, stock levels, and variations
+- 👥 **Customer Management** - Maintain customer records and purchase history
+- 📈 **Sales Analytics** - Comprehensive reporting and business insights
+- 🏪 **Multi-store Support** - Manage multiple locations from one system
+- 💳 **Payment Processing** - Support for various payment methods
+- 🎨 **Modern UI** - Clean, responsive interface built with TailwindCSS
+- 🔐 **Secure Authentication** - Role-based access control with Laravel Sanctum
+- 🌐 **API Ready** - RESTful API for integrations and mobile apps
+- 📱 **Responsive Design** - Works seamlessly on smartphones, tablets, and desktops
 
-## Documentation
-All the documentation for NexoPOS can be found on [My NexoPOS](https://my.nexopos.com/en/documentation). That includes : 
+## Technology Stack
 
-- [Configuring the environment](https://my.nexopos.com/en/documentation/getting-started/configuring-the-environment)
-- [Downloading NexoPOS](https://my.nexopos.com/en/documentation/getting-started/download-and-install)
-- [Installing NexoPOS](https://my.nexopos.com/en/documentation/getting-started/installation-wizard)
-- [Rest API](https://docs.api.nexopos.com)
+- **Backend**: Laravel 11 (PHP 8.2+)
+- **Frontend**: Vue.js 3 with TypeScript
+- **Database**: MySQL
+- **Styling**: TailwindCSS
+- **Build Tool**: Vite
+- **Authentication**: Laravel Sanctum
 
-And for developers, there are more technical tutorials that cover:
-- [Creating a module](https://my.nexopos.com/en/documentation/developpers-guides/how-to-create-a-module-for-nexopos-4-x)
-- [Create a menu for a module](https://my.nexopos.com/en/documentation/developpers-guides/how-to-create-a-menu-on-nexopos-4-x)
-- [Create a route](https://my.nexopos.com/en/documentation/developpers-guides/how-to-register-routes-for-modules)
+## Requirements
 
-We've also created a video tutorial that will help you perform those easily.
+- PHP 8.2 or higher
+- MySQL 5.7+ or MariaDB 10.3+
+- Composer
+- Node.js 18+ and npm
+- Web server (Apache/Nginx)
 
-[
-![image](https://user-images.githubusercontent.com/5265663/163531524-408757a8-d5a8-40b1-8e8f-c4e59e778e05.png)
-](https://www.youtube.com/watch?v=V80-hOJCywY)
+## Installation
 
-# Get More Using Modules
-NexoPOS available on [CodeCanyon](https://codecanyon.net/item/nexopos-4x-pos-crm-inventory-manager/31188619) gives access to the premium modules marketplace. While purchasing on CodeCanyon, you get : 
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/BigPapaSmoke/firuman3.git
+   cd firuman3
+   ```
 
-- $40 In credit to [My NexoPOS](https://my.nexopos.com/en/marketplace) balance.
-- Access to NexoPOS marketplace
-- Premium Support & Installation Service
-- You're eligible for customization
+2. **Install PHP dependencies**
+   ```bash
+   composer install
+   ```
 
-## Changelog & Feature Announcement
-We frequently discuss the future of the app (while waiting discussions are allowed). You can join the WhatsApp [group where tips](https://chat.whatsapp.com/KHWgNmfcfJy7SwJiRQTmG8) are shared on NexoPOS.
+3. **Install Node.js dependencies**
+   ```bash
+   npm install
+   ```
+
+4. **Environment setup**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+5. **Configure your database**
+   Edit `.env` file with your database credentials:
+   ```env
+   APP_NAME="Firuman"
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=your_database_name
+   DB_USERNAME=your_username
+   DB_PASSWORD=your_password
+   ```
+
+6. **Run database migrations**
+   ```bash
+   php artisan migrate
+   ```
+
+7. **Seed the database (optional)**
+   ```bash
+   php artisan db:seed
+   ```
+
+8. **Create storage symlink**
+   ```bash
+   php artisan storage:link
+   ```
+
+9. **Build frontend assets**
+   ```bash
+   npm run build
+   ```
+
+10. **Start the development server**
+    ```bash
+    php artisan serve
+    ```
+
+Visit `http://127.0.0.1:8000` to access your Firuman installation.
+
+## Development
+
+### Frontend Development
+For frontend development with hot reload:
+```bash
+npm run dev
+```
+
+For TailwindCSS development:
+```bash
+npm run css-watch
+```
+
+### Running Tests
+```bash
+php artisan test
+```
+
+### Code Style
+Format code using Laravel Pint:
+```bash
+./vendor/bin/pint
+```
+
+## API Documentation
+
+Firuman provides a comprehensive RESTful API for integrations. API endpoints are available under `/api/nexopos/v4/`.
+
+### Authentication
+Use Laravel Sanctum personal access tokens for API authentication. Generate tokens from the dashboard under the API tab.
+
+## Configuration
+
+### Environment Variables
+Key configuration options in `.env`:
+
+- `APP_NAME` - Application name (Firuman)
+- `APP_URL` - Your application URL
+- `DB_*` - Database configuration
+- `MAIL_*` - Email configuration
+- `SESSION_COOKIE` - Session cookie name (firuman_session)
+
+### Modules
+Firuman supports a modular architecture. Custom modules can be placed in the `modules/` directory.
 
 
-## Support Terms
+## Contributing
 
-1 - The support on NexoPOS only applies to the information provided by the users while creating an issue. This means we won't either do the installation on your server or check an issue on your server. You're therefore invited not to post your server information while creating an issue. We'll use your explanations to reproduce your issue and therefore to solve it.
-
-2 - If you would like to have a dedicated support. Consider registering as a member to [My NexoPOS platform](https://my.nexopos.com/en/account/checkout/premium).
-
-## Troubleshooting
-Here we list the known issues and the way around them. Not everyone is likely to face these issues as it depends on the used environment.
-
-- CSRF error After Installation
-Chances are when you make your installation, you'll have your website URL changed. Unfortunately, if the domain has to change, it must be clearly described on the .env file. We've written a guide that explains how to solve the [CSRF issue on NexoPOS](https://my.nexopos.com/en/documentation/troubleshooting/how-to-fix-csrf-token-mismatch-on-nexopos-4-x).
-
-- Error After Database Details (using `php artisan serve`)
-If you're serving the project using `php artisan serve`, after setting up the database credentials and having them validated, you might stop on an infinite
-loading page. 
-
-![screenshot-127 0 0 1_8000-2020 10 01-00_33_17](https://user-images.githubusercontent.com/5265663/94781001-17809f00-037e-11eb-9f14-3bf4427054bf.png)
-
-This is caused because during the database setup, the ".env" is updated which causes Laravel to restart the development server and therefore invalidate your session. The way around this is to refresh the page and you'll end up in the application details section.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## Contribution Guidelines
-Do you plan to contribute? That's awesome. We don't have that many developers on it, so we're open to any type of contributions. If you're a developer, you'll start by forking the project and deploying that locally for further tests. Typically, you'll need to build the project (Vue.js) in watch mode. You'll then start by ensuring the .env value "NS_ENV" is set to "dev". From there, you can run the following command :
+Do you plan to contribute? That's awesome. We don't have that many developers on it, so we're open to any type of contributions. If you're a developer, you'll start by forking the project and deploying that locally for further tests. 
+
+To build the project for development:
 
 **To install Node.js dependencies**
-```
+```bash
 npm install
 ```
 
 **To watch the Vue component changes (Vue.js)**
-```
+```bash
 npm run dev
 ```
 
 **To watch the project changes (TailwindCSS)**
-```
+```bash
 npm run css-watch
 ```
 
-**To build the project for production, you'll need to only run that command:**
-This will build the JavaScript file and CSS files.
-
-```
+**To build the project for production:**
+```bash
 npm run prod
 ```
 
-## Star History
-Thank you for all your support over the years :).
+## Troubleshooting
 
-[![Star History Chart](https://api.star-history.com/svg?repos=blair2004/NexoPOS&type=Date)](https://star-history.com/#blair2004/NexoPOS&Date)
+### CSRF Error After Installation
+If you encounter CSRF errors after installation, make sure your website URL is correctly set in the `.env` file. The `APP_URL` must match your actual domain.
 
+### Error After Database Setup (using `php artisan serve`)
+If you're using `php artisan serve` and encounter infinite loading after database setup, simply refresh the page. This happens because Laravel restarts the development server when the `.env` file is updated.
+
+## Security
+
+If you discover any security vulnerabilities, please create an issue on GitHub or contact the maintainers directly.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Built on the foundation of NexoPOS
+- Laravel community for the amazing framework
+- Vue.js team for the reactive frontend framework
+- TailwindCSS for the utility-first CSS framework
 
 ## Screenshots
-The branch 4.7.x introduces the "Dark Mode" which will make working continuously with NexoPOS easier without hurting sight.
 
-### Media Component
-The media components help upload images and manage them. This comes with a field that will ease assigning images to products.
-![image](https://user-images.githubusercontent.com/5265663/159091815-5b022ec6-9df4-419b-86f0-85db73ce35c5.png)
+### POS Interface
+The POS is designed to provide everything the cashier needs to process orders quickly and easily with the Firuman branding.
 
-### POS Component
-The POS is the place where sales are made and handled. The POS is made to provide everything the cashier needs to process orders quickly and easily.
-![image](https://user-images.githubusercontent.com/5265663/159092595-3b2e4371-fef4-471c-84cd-b04cb2b7c611.png)
+### Dashboard
+Firuman includes a responsive and beautiful dashboard that works seamlessly on smartphones, tablets, and desktops.
 
-### Orders Components
-Every saved sale is listed on the orders list. From there various operations such as opening the receipt, proceeding with a refund, and making payment can be performed.
-![image](https://user-images.githubusercontent.com/5265663/159092684-53a0c41a-d76d-4b69-b737-4420a20b33a1.png)
+### Products Management
+Manage your inventory with an intuitive interface for adding and editing products.
 
-### Products Components
-The resources that are sold are the products. The product UI has been simplified to ensure all necessary details can be added.
-![image](https://user-images.githubusercontent.com/5265663/159092753-845b930c-0b4f-4b3d-a42e-8658f74e7499.png)
+### Orders Management
+Every saved sale is listed with options for receipts, refunds, and payment processing.
 
-### Settings Components
-Configure how NexoPOS works. From the settings, you can configure various sections of your application including the currency, the POS features, the orders, and much more.
-![image](https://user-images.githubusercontent.com/5265663/159092979-267841bc-531d-4a27-b35f-902866fa742a.png)
+---
+
+<div align="center">
+© 2025 Firuman. All rights reserved.  
+
+💡 *Built on the shoulders of giants:* [NexoPOS](https://nexopos.com)
+</div>

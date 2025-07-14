@@ -113,7 +113,7 @@ if ( Auth::check() ) {
                             @if ( ns()->option->get( 'ns_store_rectangle_logo' ) )
                             <img src="{{ ns()->option->get( 'ns_store_rectangle_logo' ) }}" class="w-11/12" alt="logo"/>
                             @else
-                            <h1 class="font-black text-transparent bg-clip-text bg-gradient-to-b from-blue-200 to-indigo-400 text-3xl">NexoPOS</h1>
+                            <h1 class="font-black text-transparent bg-clip-text bg-gradient-to-b from-orange-400 to-red-500 text-3xl">Firuman</h1>
                             @endif
                         </div>
                         <ul>
@@ -155,9 +155,18 @@ if ( Auth::check() ) {
                         @include( 'common.dashboard.with-title' )
                     @endif
                 </div>
-                <div class="p-2 text-xs flex justify-end text-gray-500">
-                    {!! Hook::filter( 'ns-footer-signature', sprintf( __( 'You\'re using <a tager="_blank" href="%s" class="hover:text-blue-400 mx-1 inline-block">NexoPOS %s</a>' ), 'https://my.nexopos.com/en', config( 'nexopos.version' ) ) ) !!}
-                </div>
+<!-- Firuman footer -->
+                <footer style="font-family: Arial, sans-serif; font-size: 14px; color: #e5e7eb; width: 100%; display: flex; align-items: center; justify-content: center; gap: 16px; padding: 8px 0;">
+                    <span style="display: flex; align-items: center; gap: 6px;">
+                        © 2025 Firuman
+                        <svg width="20" height="20" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle;">
+                            <path fill="#FF4500" d="M32 2C32 2 10 22 10 39C10 53 22 62 32 62C42 62 54 53 54 39C54 22 32 2 32 2Z"/>
+                            <path fill="#FF6347" d="M32 14C32 14 19 26 19 38C19 45 25 51 32 51C39 51 45 45 45 38C45 26 32 14 32 14Z"/>
+                        </svg>
+                        No Bloat. No Noise. Just Firuman.
+                    </span>
+                    <span style="margin-left: 16px;">| Powered by <a href="https://nexopos.com" target="_blank" rel="noopener noreferrer" style="color: #60a5fa; text-decoration: none;">NexoPOS</a></span>
+                </footer>                
             </div>
         </div>
     </div>

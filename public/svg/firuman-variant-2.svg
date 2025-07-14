@@ -1,0 +1,45 @@
+<svg width="190" height="190" viewBox="0 0 190 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Firuman Flame Logo - Variant 2 -->
+    <circle cx="95" cy="95" r="95" fill="#1F2937"/>
+    
+    <!-- Main flame -->
+    <path fill="url(#fireGradient1)" d="M95 15C95 15 55 45 55 75C55 105 70 125 95 125C120 125 135 105 135 75C135 45 95 15 95 15Z"/>
+    
+    <!-- Inner flame -->
+    <path fill="url(#fireGradient2)" d="M95 35C95 35 75 55 75 75C75 90 85 100 95 100C105 100 115 90 115 75C115 55 95 35 95 35Z"/>
+    
+    <!-- Core flame -->
+    <path fill="url(#fireGradient3)" d="M95 50C95 50 85 60 85 70C85 78 90 83 95 83C100 83 105 78 105 70C105 60 95 50 95 50Z"/>
+    
+    <!-- Sparks/embers -->
+    <circle cx="75" cy="45" r="2" fill="#FFB84D" opacity="0.8">
+        <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="115" cy="50" r="1.5" fill="#FF6347" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.2;0.6" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="65" cy="65" r="1" fill="#FFD700" opacity="0.7">
+        <animate attributeName="opacity" values="0.7;0.1;0.7" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Company name -->
+    <text x="95" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF">FIRUMAN</text>
+    <text x="95" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">Point of Sale System</text>
+    
+    <defs>
+        <linearGradient id="fireGradient1" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" style="stop-color:#FF4500;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#8B0000;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="fireGradient2" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" style="stop-color:#FF6347;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FF4500;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="fireGradient3" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FF6347;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+</svg>

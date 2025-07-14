@@ -1,0 +1,15 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Firuman Flame Logo -->
+    <circle cx="64" cy="64" r="64" fill="url(#gradient1)"/>
+    <path fill="#FF4500" d="M64 8C64 8 24 44 24 78C24 106 44 124 64 124C84 124 104 106 104 78C104 44 64 8 64 8Z"/>
+    <path fill="#FF6347" d="M64 28C64 28 40 52 40 76C40 90 50 102 64 102C78 102 88 90 88 76C88 52 64 28 64 28Z"/>
+    <path fill="#FFB84D" d="M64 44C64 44 52 58 52 70C52 78 58 84 64 84C70 84 76 78 76 70C76 58 64 44 64 44Z"/>
+    <text x="64" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">FIRUMAN</text>
+    
+    <defs>
+        <radialGradient id="gradient1" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color:#FFE4B5;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#FF4500;stop-opacity:1" />
+        </radialGradient>
+    </defs>
+</svg>
