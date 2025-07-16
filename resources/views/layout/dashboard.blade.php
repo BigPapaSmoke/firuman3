@@ -102,6 +102,9 @@ if ( Auth::check() ) {
         }
     </script>
     @vite([ 'resources/ts/lang-loader.ts' ])
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+   
 </head>
 <body <?php echo in_array( app()->getLocale(), config( 'nexopos.rtl-languages' ) ) ? 'dir="rtl"' : "";?>>
     <div class="h-full w-full flex flex-col">
@@ -166,6 +169,22 @@ if ( Auth::check() ) {
                         No Bloat. No Noise. Just Firuman.
                     </span>
                     <span style="margin-left: 16px;">| Powered by <a href="https://nexopos.com" target="_blank" rel="noopener noreferrer" style="color: #60a5fa; text-decoration: none;">NexoPOS</a></span>
+                    
+                    <!-- SALES REPORT BUTTON -->
+                    <form method="POST" action="/send-sales-report" style="margin-left: 16px; display: inline;">
+                        @csrf
+                        <button type="submit" style="background: #FF4500; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 12px;">
+                            📧 Send Sales Report
+                        </button>
+                    </form>
+
+
+<!-- SIGNAL MESSAGING BUTTON -->
+<button onclick="sendTestSignal()" style="background: #0084FF; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 12px; margin-left: 8px;">
+    📱 Send Signal Test
+</button>
+
+
                 </footer>                
             </div>
         </div>
@@ -175,5 +194,39 @@ if ( Auth::check() ) {
         @include( 'common.dashboard-footer' )
         @vite([ 'resources/ts/app.ts' ])
     @show
+
+        <script>
+    async function sendTestSignal() {
+        try {
+            event.target.innerHTML = '📤 Sending...';
+            event.target.disabled = true;
+            
+            const response = await fetch('/api/signal/send-to-all', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ 
+                    message: '🔥 Firuman Test Message - Signal integration working!' 
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (data.status === 'success') {
+                alert('✅ Signal test sent successfully!');
+            } else {
+                alert('❌ Signal test failed: ' + data.message);
+            }
+        } catch (error) {
+            alert('❌ Error: ' + error.message);
+        } finally {
+            event.target.innerHTML = '📱 Send Signal Test';
+            event.target.disabled = false;
+        }
+    }
+    </script>
+    </body>
 </body>
 </html>
