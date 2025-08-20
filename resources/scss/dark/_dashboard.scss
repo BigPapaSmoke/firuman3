@@ -113,3 +113,24 @@
         @apply border-box-edge;
     }
 }
+
+/**
+ * Dashboard Footer Styles
+ */
+.firuman-dashboard-footer {
+    @apply bg-slate-900 text-slate-300 border-slate-700;
+    
+    a {
+        @apply text-blue-400;
+        
+        &:hover {
+            @apply text-blue-300;
+        }
+    }
+    
+    button {
+        &:hover {
+            @apply shadow-lg;
+        }
+    }
+}

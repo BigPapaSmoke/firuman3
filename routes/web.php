@@ -3,7 +3,6 @@
 use App\Events\BeforeStartWebRouteEvent;
 use App\Http\Controllers\DevController;
 use App\Http\Controllers\Dashboard\SalesReportController;
-use App\Http\Controllers\Dashboard\SignalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,8 +69,4 @@ if ( env( 'APP_DEBUG' ) ) {
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/send-sales-report', [SalesReportController::class, 'sendManualReport'])->name('sales.report.send');
-    
-    // Signal Routes
-    Route::post('/api/signal/send-to-all', [SignalController::class, 'sendToAllStands']);
-    Route::post('/api/signal/send-sales-update', [SignalController::class, 'sendSalesUpdate']);
 });

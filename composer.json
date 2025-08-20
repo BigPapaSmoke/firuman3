@@ -11,6 +11,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2.0",
+        "aws/aws-sdk-php": "^3.351",
         "brianium/paratest": "^7.1",
         "brick/math": "^0.12.0",
         "dekor/php-array-table": "^2.0",

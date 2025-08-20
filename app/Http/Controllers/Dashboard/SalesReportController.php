@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Mail\DailySalesReport;
+use App\Mail\DailySalesReportMail;
 use App\Services\SalesReportService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -26,7 +26,7 @@ class SalesReportController extends Controller
             $emails = array_filter($emails); // Remove empty emails
             
             foreach ($emails as $email) {
-                Mail::to($email)->send(new DailySalesReport(
+                Mail::to($email)->send(new DailySalesReportMail(
                     $salesData, 
                     'manual', 
                     $date->format('M d, Y')
