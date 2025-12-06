@@ -1,3 +1,11 @@
+import axios from 'axios';
+
+// Grab the CSRF token from the meta tag
+const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+// Set Axios to include CSRF token in every request
+axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+
 import * as components from './components/components';
 
 import { NsHotPress }       from './libraries/ns-hotpress';

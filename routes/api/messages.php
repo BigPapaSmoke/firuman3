@@ -27,4 +27,7 @@ Route::prefix('messages')->group(function () {
     
     // Get a specific message
     Route::get('/{message}', [MessageController::class, 'show']);
+    
+    // NEW: Live sales dashboard API endpoint
+    Route::get('/live-sales-dashboard/{storeCount?}', [MessageController::class, 'getLiveSalesDashboard']);
 });

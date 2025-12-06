@@ -2,6 +2,18 @@ import * as Lodash from "lodash";
 import EchoClass from "laravel-echo";
 import Pusher from 'pusher-js';
 import axios from "axios";
+
+// Grab the CSRF token from the meta tag
+const tokenMeta = document.querySelector('meta[name="csrf-token"]');
+if (tokenMeta) {
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = tokenMeta.getAttribute('content');
+}
+
+// Optional: mark all requests as AJAX
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.withCredentials = true;
+
+
 import * as ChartJS from "chart.js";
 import { fromEvent } from "rxjs";
 import * as RxJS from 'rxjs';

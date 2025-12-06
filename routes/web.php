@@ -69,4 +69,16 @@ if ( env( 'APP_DEBUG' ) ) {
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/send-sales-report', [SalesReportController::class, 'sendManualReport'])->name('sales.report.send');
+
+
+
+// Live sales dashboards
+Route::get('/insane-live', function () {
+    return view('insane-live');
+})->name('insane.live.dashboard');
+
+Route::get('/billybob-live', function () {
+    return view('billybob-live');
+})->name('billybob.live.dashboard');
+
 });

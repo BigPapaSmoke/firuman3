@@ -23,9 +23,7 @@ return new class extends Migration
             $table->json('metadata')->nullable(); // For storing additional data like report types
             $table->timestamps();
 
-            $table->foreign('sender_id')->references('id')->on('nexopos_users')->onDelete('cascade');
-            $table->foreign('recipient_id')->references('id')->on('nexopos_users')->onDelete('cascade');
-            
+
             $table->index(['recipient_id', 'read_at']);
             $table->index(['sender_id', 'created_at']);
         });

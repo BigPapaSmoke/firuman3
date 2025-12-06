@@ -208,4 +208,50 @@ class MessageController extends Controller
             'updated_at' => now()
         ]);
     }
+
+    public function getLiveSalesDashboard($storeCount = 20): JsonResponse
+    {
+        $today = now()->format('Y-m-d');
+        
+        // Generate sample data for demo purposes (you can replace with real data later)
+        $stores = collect();
+        
+        for ($i = 1; $i <= $storeCount; $i++) {
+            $sales = rand(15000, 89999) / 100; // Random sales between $150-$899
+            $orders = rand(5, 45); // Random order count
+            
+            $stores->push([
+                'store_name' => "Store {$i}",
+                'store_id' => $i,
+                'total_sales' => $sales,
+                'order_count' => $orders
+            ]);
+        }
+
+        $totalSales = $stores->sum('total_sales');
+        $totalOrders = $stores->sum('order_count');
+        $averageTicket = $totalOrders > 0 ? $totalSales / $totalOrders : 0;
+
+        return response()->json([
+            'date' => now()->format('M j, Y'),
+            'stores' => $stores,
+            'summary' => [
+                'total_sales' => $totalSales,
+                'total_orders' => $totalOrders,
+                'store_count' => $storeCount,
+                'average_per_store' => $totalSales / $storeCount,
+                'average_ticket' => $averageTicket  // NEW!
+            ],
+            'last_updated' => now()->format('g:i:s A')
+        ]);
+    }
+
+
+
+
 }
+
+
+
+
+
