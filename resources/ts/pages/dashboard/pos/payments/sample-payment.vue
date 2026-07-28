@@ -35,6 +35,11 @@
                             style="margin:-1px;"
                             class="ns-numpad-key text-2xl border h-16 flex items-center justify-center cursor-pointer">
                             <span v-if="key.value !== undefined">{{ key.value }}</span>
+                            <span
+                                v-if="key.label"
+                                class="text-sm font-bold mr-1">
+                                {{ __( key.label ) }}
+                            </span>
                             <i v-if="key.icon" class="las" :class="key.icon"></i>
                         </div>
                         <div
@@ -87,7 +92,11 @@ export default {
                 ...([7,8,9].map( key => ({ identifier: key, value: key }))),
                 ...([4,5,6].map( key => ({ identifier: key, value: key }))),
                 ...([1,2,3].map( key => ({ identifier: key, value: key }))),
-                ...[{ identifier: 'backspace', icon : 'la-backspace' },{ identifier: 0, value: 0 }, { identifier: 'next', icon: 'la-share' }],
+                ...[
+                    { identifier: 'backspace', icon: 'la-backspace' },
+                    { identifier: 0, value: 0 },
+                    { identifier: 'next', label: 'ADD PARTIAL', icon: 'la-arrow-right' },
+                ],
             ]
         }
     },
@@ -139,8 +148,14 @@ export default {
                         this.$emit( 'submit' );
                         this.backValue = 0;
                     } else {
+                        const remaining = Math.max(
+                            0,
+                            Number( order.total ) - Number( order.tendered )
+                        );
+
                         nsSnackBar.error(
-                            __( 'The full order total must be paid before completing this sale.' )
+                            __( 'PAYMENT INCOMPLETE: {amount} STILL DUE' )
+                                .replace( '{amount}', nsCurrency( remaining ) )
                         ).subscribe();
                     }
                 } else {
@@ -173,12 +188,17 @@ export default {
             }
         },
         makeFullPayment() {
-            const order     =   POS.order.getValue();
+            const order = POS.order.getValue();
+            const remaining = Math.max(
+                0,
+                Number( order.total ) - Number( order.tendered )
+            );
+
             Popup.show( nsPosConfirmPopupVue, {
-                title: __( 'Confirm Full Payment' ),
-                message: __( 'A full payment will be made using {paymentType} for {total}' )
+                title: __( 'Confirm Remaining Payment' ),
+                message: __( 'A {paymentType} payment of {remaining} will complete this sale.' )
                     .replace( '{paymentType}', this.label )
-                    .replace( '{total}', nsCurrency( this.order.total ) ),
+                    .replace( '{remaining}', nsCurrency( remaining ) ),
                 onAction: ( action ) => {
                     if ( action ) {
                         const order     =   POS.order.getValue();

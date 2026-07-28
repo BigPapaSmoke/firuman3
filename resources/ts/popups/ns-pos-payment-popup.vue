@@ -137,8 +137,14 @@ export default {
              * or completion of a partially paid retail order.
              */
             if ( Number( order.tendered ) < Number( order.total ) ) {
+                const remaining = Math.max(
+                    0,
+                    Number( order.total ) - Number( order.tendered )
+                );
+
                 nsSnackBar.error(
-                    __( 'The full order total must be paid before completing this sale.' )
+                    __( 'PAYMENT INCOMPLETE: {amount} STILL DUE' )
+                        .replace( '{amount}', nsCurrency( remaining ) )
                 ).subscribe();
 
                 return;
