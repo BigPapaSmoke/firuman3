@@ -12,7 +12,6 @@ import samplePaymentVue from '~/pages/dashboard/pos/payments/sample-payment.vue'
 import nsSelectPopupVue from './ns-select-popup.vue';
 import { nsCurrency, nsRawCurrency } from '~/filters/currency';
 import { ref } from 'vue';
-import { nsConfirmPopup } from '~/components/components';
 
 declare const POS, nsHooks, nsCloseButton, nsButton, shallowRef;
 
@@ -30,12 +29,6 @@ export default {
             currentPaymentComponent: null,
             activePaymentSubscription: null,
         } 
-    },
-    computed: {
-        expectedPayment() {
-            const minimalPaymentPercent     =   this.order.customer.group.minimal_credit_payment;
-            return ( this.order.total * minimalPaymentPercent ) / 100;
-        }
     },
     mounted() {
         this.orderSubscription          =   POS.order.subscribe( order => {
@@ -127,57 +120,6 @@ export default {
         selectPaymentAsActive( event ) {
             this.select( this.paymentsType.filter( payment => payment.identifier === event.target.value )[0] );
         },
-        // no payment is necessary here so we'll proceed
-        async submiAsUnpaid() {
-            let confirmResponse;
-            try {
-                confirmResponse = await new Promise( ( resolve ) => {
-                    const response = Popup.show( nsConfirmPopup, {
-                        title: __( 'Save As Unpaid' ),
-                        message: __( 'Are you sure you want to save this order as unpaid?' ),
-                        onAction: ( action ) => {
-                            resolve(action)
-                        }
-                    })
-                })
-            } catch( exception ) {
-                nsSnackBar.error( exception.message || __( 'An unexpected error occured while saving the order as unpaid.' ) ).subscribe();
-                console.log( exception );
-                // ...
-            }
-
-            /**
-             * The use hasn't confirmed the action
-             * so we'll return false
-             */
-            if ( ! confirmResponse ) {
-                return false;
-            }
-
-            const popup     =   Popup.show( nsPosLoadingPopupVue );
-            
-            try {
-
-                /**
-                 * if there is any payment defined
-                 * we might need to remove that and refresh the order
-                 */
-                POS.order.next({ ...POS.order.getValue(), payments: [] });
-                POS.refreshCart();
-                const result: { message: string, data: any } = await new Promise( ( resolve, reject ) => {
-                    POS.proceedSubmitting( POS.order.getValue(), resolve, reject );
-                });
-
-                popup.close();
-                this.popup.close();
-                nsSnackBar.success( result.message ).subscribe();
-                POS.printOrderReceipt( result.data.order, 'silent' );
-            } catch( exception ) {
-                popup.close();
-                // show error message
-                nsSnackBar.error( exception.message || __( 'An error occured while saving the order as unpaid.' ) ).subscribe();
-            }
-        },
         getPaymentLabel( payment ) {
             const foundPayment = this.paymentsType.filter( p => p.identifier === payment.identifier )[0];
 
@@ -188,12 +130,23 @@ export default {
             return payment.identifier;
         },
         submitOrder( data = {}) {
-            const popup     =   Popup.show( nsPosLoadingPopupVue );
+            const order = { ...POS.order.getValue(), ...data };
+
+            /**
+             * FirumanPOS does not allow layaway, unpaid checkout,
+             * or completion of a partially paid retail order.
+             */
+            if ( Number( order.tendered ) < Number( order.total ) ) {
+                nsSnackBar.error(
+                    __( 'The full order total must be paid before completing this sale.' )
+                ).subscribe();
+
+                return;
+            }
+
+            const popup = Popup.show( nsPosLoadingPopupVue );
             
             try {
-
-                const order     =   { ...POS.order.getValue(), ...data };
-
                 POS.submitOrder( order ).then( result => {
                     // close spinner
                     popup.close();
@@ -288,9 +241,6 @@ export default {
                     <button v-if="order.tendered >= order.total" @click="submitOrder()" class="flex items-center justify-center w-1/3 text-2xl flex-auto h-12 ns-submit-button font-bold">
                         <span class="text-sm">{{ __( 'Submit Payment' ) }}</span>
                     </button>
-                    <button v-if="order.tendered < order.total" @click="submitOrder({ payment_status: 'unpaid' })" class="flex items-center justify-center w-1/3 text-2xl flex-auto h-12 ns-layaway-button font-bold">
-                        <span class="text-sm">{{ __( 'Layaway' ) }}</span>
-                    </button>
                     <button @click="showPayment = true" class="w-1/3 flex ns-payment-button text-2xl flex-auto h-12 items-center justify-center font-bold">
                         <span class="text-sm mr-1">{{ __( 'Payment List' ) }}</span>
                         <span class="px-2 rounded-full h-6 w-6 text-xs flex items-center justify-center ns-label">{{ order.payments.length }}</span>
@@ -301,21 +251,6 @@ export default {
                         <ns-button v-if="order.tendered >= order.total" @click="submitOrder()" :type="order.tendered >= order.total ? 'success' : 'info'">
                             <span ><i class="las la-cash-register"></i> {{ __( 'Submit Payment' ) }}</span>
                         </ns-button>
-                        <div v-if="order.tendered < order.total" class="flex -mx-2">
-                            <div class="px-2">
-                                <ns-button v-if="order.tendered === 0" @click="submitOrder({ payment_status: 'unpaid' })" :type="order.tendered >= order.total ? 'success' : 'info'">
-                                    <span><i class="las la-bookmark"></i> {{ __( 'Layaway' ) }} &mdash; {{ nsCurrency( expectedPayment ) }}</span>
-                                </ns-button>                         
-                                <ns-button v-if="order.tendered > 0" @click="submitOrder({ payment_status: 'unpaid' })" type="info">
-                                    <span><i class="las la-save"></i> {{ __( 'Update' ) }}</span>
-                                </ns-button>                         
-                            </div>
-                            <div class="px-2" v-if="order.tendered === 0">
-                                <ns-button @click="submiAsUnpaid()" :type="'info'">
-                                    <span><i class="las la-hands-helping"></i> {{ __( 'Save As Unpaid' ) }}</span>
-                                </ns-button>                         
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

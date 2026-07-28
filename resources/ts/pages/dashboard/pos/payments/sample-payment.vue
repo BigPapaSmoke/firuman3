@@ -133,8 +133,16 @@ export default {
                  * emit the event "submit" to speed up the process.
                  */
                 if ( this.backValue === '' ) {
-                    this.$emit( 'submit' );
-                    this.backValue  =   0;
+                    const order = POS.order.getValue();
+
+                    if ( Number( order.tendered ) >= Number( order.total ) ) {
+                        this.$emit( 'submit' );
+                        this.backValue = 0;
+                    } else {
+                        nsSnackBar.error(
+                            __( 'The full order total must be paid before completing this sale.' )
+                        ).subscribe();
+                    }
                 } else {
                     this.inputValue({ identifier: 'next' });
                 }
