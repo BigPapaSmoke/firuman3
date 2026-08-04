@@ -38,8 +38,15 @@ class GeneralSettings extends SettingsPage
                 FormInput::text(
                     name: 'ns_store_name',
                     value: ns()->option->get( 'ns_store_name' ),
-                    label: __( 'Store Name' ),
-                    description: __( 'This is the store name.' ),
+                    label: __( 'Company Name' ),
+                    description: __( 'This is the company or business name.' ),
+                    validation: 'required',
+                ),
+                FormInput::text(
+                    name: 'ns_location_name',
+                    value: ns()->option->get( 'ns_location_name' ),
+                    label: __( 'Location Name' ),
+                    description: __( 'This is the branch, stand, or store location name.' ),
                     validation: 'required',
                 ),
                 FormInput::text(
